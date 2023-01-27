@@ -40,17 +40,13 @@ You can see you get source code - to-pdf.py and a Dockerfile.
 
 ```gcloud components update```
 
-3. Install the gcloud beta components:
+3. Run the following command from the directory containing to-pdf.py and Dockerfile, where [PROJECT_ID] is your GCP project ID:
 
-```gcloud components install beta```
 
-4. Install the kubectl command-line tool:
-
-```gcloud components update```
-
-5. Run the following command from the directory containing to-pdf.py and Dockerfile, where [PROJECT_ID] is your GCP project ID:
-
-```gcloud builds submit --tag gcr.io/[PROJECT_ID]/pdf-service .```
+```
+export GCP_PROJECT_ID=unique-magpie-304203
+gcloud builds submit --tag gcr.io/$GCP_PROJECT_ID/pdf-service .
+```
 
 > Note: Don't miss the "." at the end of the above command. The "." specifies that the source code is in the current working directory at build time.
 
@@ -61,7 +57,7 @@ Next, we’re going to deploy our container image on our first flavor: fully man
 
 1. Deploy container image pdf-service on Cloud Run. 
 
-```gcloud beta run deploy --image gcr.io/[PROJECT ID]/pdf-service```
+```gcloud run deploy --image gcr.io/$GCP_PROJECT_ID/pdf-service```
 
 2. Select option 1 to deploy on fully managed Cloud Run. 
 
@@ -72,6 +68,10 @@ Next, we’re going to deploy our container image on our first flavor: fully man
 5. When it asks you if you want to allow unauthenticated invocations, select yes. 
 
 6. Click on the URL or go to the Cloud Run console and click the new deployment name to find the URL. Voila! Your serverless container image is running on a stable and secure HTTPS endpoint! You can now upload a test Word document and convert it to a pdf. 
+
+# Haven't tested the following
+
+
 
 ### Deploy Container image on Cloud Run for Anthos
 Now let’s deploy the same container image on Cloud Run for Anthos deployed on GKE. 
